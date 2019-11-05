@@ -38,7 +38,7 @@
         </div>
         
         <div class="mt-3">
-          <input type="text" class="form-control m-input" placeholder="Search..."id="generalSearch">
+          <input type="text" class="form-control m-input" id="search" placeholder="Search..."id="generalSearch">
         </div>
 
         <table class="table mt-5">
