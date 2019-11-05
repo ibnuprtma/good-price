@@ -17,3 +17,8 @@ Route::get('/', function () {
 
 
 Route::resource('tokopedia', 'TokopediaSourceController');
+Route::resource('shopee', 'ShopeeSourceController');
+
+Route::get('/shopee/stemming/data','ShopeeSourceController@stemming')->name('shopee.stemming');
+Route::get('/shopee/token/data','ShopeeSourceController@token')->name('shopee.token');
+Route::get('/shopee/case/data','ShopeeSourceController@case')->name('shopee.case');

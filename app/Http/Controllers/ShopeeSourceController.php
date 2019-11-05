@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Sastrawi\Stemmer\StemmerFactory;
+use Sastrawi\Tokenizer\TokenizerFactory;
+use Sastrawi\Stemmer\StopWordRemoverFactory;
 
 class ShopeeSourceController extends Controller
 {
@@ -12,8 +15,8 @@ class ShopeeSourceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   
+        return view('shopee.index');
     }
 
     /**
@@ -81,4 +84,72 @@ class ShopeeSourceController extends Controller
     {
         //
     }
+
+
+    public function stemming()
+    {
+        // STEMMING
+
+        $stemmerFactory = new StemmerFactory();
+        $stemmer  = $stemmerFactory->createStemmer();
+
+        $sentence = 'Perekonomian Indonesia sedang dalam pertumbuhan yang membanggakan';
+        $output   = $stemmer->stem($sentence);
+        
+        dd($output);
+    }
+
+    public function token()
+	{
+       
+        // TOKEN
+       
+        $tokenizerFactory  = new TokenizerFactory();
+        $tokenizer = $tokenizerFactory->createDefaultTokenizer();
+
+        $strArray = 'Saya sedang belajar NLP Bahasa Indonesia.';
+
+            $tokens = $tokenizer->tokenize($strArray);
+            $output = implode(" | ",$tokens);
+        
+        dd($output);
+        
+    }
+
+    public function case()
+    {
+     
+        // CASE FOLDING
+
+        $strArray = 'Saya Syuka KamaamuS';
+
+        $output   = strtolower($strArray);
+        
+        dd($output);
+    }
+
+
+    // public function stop()
+    // {
+        
+    //     $female = female::select('review')->get();
+    //     $stopWordRemoverFactory = new StopWordRemoverFactory();
+    //     $stopword = $stopWordRemoverFactory->createStopWordRemover();
+
+    //     $strArray = array();
+
+    //     foreach ($female as $key) {
+    //         $str = $key['review'];
+    //         $output   = $stopword->remove($str);
+    //         array_push($strArray, $output);
+    //     }
+    //     //Perekonomian Indonesia sedang pertumbuhan membanggakan
+    //     return view('fstopword',['output'=>$strArray]);
+
+        
+    // }
+
+
+
+
 }
