@@ -36,6 +36,10 @@
                 </div>
             </div>
         </div>
+        
+        <div class="mt-3">
+          <input type="text" class="form-control m-input" placeholder="Search..."id="generalSearch">
+        </div>
 
         <table class="table mt-5">
             <thead>
@@ -67,6 +71,8 @@
               </tr>
             </tbody>
           </table>
+
+          <div class="m_datatable" id="json_data"></div>
     </div>
 
 @endsection
