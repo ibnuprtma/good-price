@@ -41,38 +41,58 @@
           <input type="text" class="form-control m-input" placeholder="Search..."id="generalSearch">
         </div>
 
-        <table class="table mt-5">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <div class="m_datatable" id="json_data"></div>
+        <div class="table-responsive mt-3">
+          <table class="table" id="user_table">
+                 <thead>
+                  <tr>
+                      <th width="10%">Image</th>
+                      <th width="35%">First Name</th>
+                      <th width="35%">Last Name</th>
+                      <th width="30%">Action</th>
+                  </tr>
+                 </thead>
+             </table>
+         </div>
     </div>
 
 @endsection
+
+
+@push('footer-scripts')
+    <script>
+    $(document).ready(function(){
+
+      $('#user_table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax:{
+          url: "https://memfis-aircraft.dev/datatables/customer",
+        },
+        columns:[
+          {
+            data: 'image',
+            name: 'image',
+            render: function(data, type, full, meta){
+              return "<img src={{ URL::to('/') }}/images/" + data + " width='70' class='img-thumbnail' />";
+          },
+            orderable: false
+          },
+          {
+            data: 'first_name',
+            name: 'first_name'
+          },
+          {
+            data: 'last_name',
+            name: 'last_name'
+          },
+          {
+            data: 'action',
+            name: 'action',
+            orderable: false
+          }
+        ]
+      });
+    });
+    </script>
+@endpush
+
