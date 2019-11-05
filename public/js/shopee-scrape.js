@@ -6,7 +6,7 @@ $(document).ready(function () {
 
         var items = []
 
-        var originalURL = 'https://shopee.co.id/api/v2/search_items/?by=relevancy&keyword=' + search + '&limit=50&newest=0&order=desc&page_type=search&version=2'
+        var originalURL = 'https://shopee.co.id/api/v2/search_items/?by=relevancy&keyword=' + search + '&limit=20&newest=0&order=desc&page_type=search&version=2'
         var queryURL = "https://cors-anywhere.herokuapp.com/" + originalURL
 
         console.log(search)
@@ -21,27 +21,40 @@ $(document).ready(function () {
             },
             success: function (response) {
                 var resItems = response['items']
-
+                
                 $.each(resItems, function () {
-                    if (this['adsid'] == null) {
-                        var data = []
+                    var data = []
 
-                        name = this['name']
-                        data['name'] = name
+                    name = this['name']
+                    data['name'] = name
 
-                        price = this['price']
-                        data['price'] = price
+                    data['price'] = this['price']
 
-                        items.push(data)
-                    }
+                    var originalURLDetail = 'https://shopee.co.id/api/v2/item/get?itemid='+ this['itemid'] +'&shopid=' + this['shopid']
+                    var queryURLDetail = "https://cors-anywhere.herokuapp.com/" + originalURLDetail
+                    
+                    // $.ajax({
+                    //     url: queryURLDetail,
+                    //     method: "GET",
+                    //     dataType: "json",
+                    //     // this headers section is necessary for CORS-anywhere
+                    //     headers: {
+                    //         "x-requested-with": "xhr"
+                    //     },
+                    //     success: function (res) {
+                    //         data['price'] = res['price']
+                    //         console.log(res)
+                    //     }
+                    // })
+
+                    items.push(data)
                 })
             },
-            error: function (request, status, error) {
-                alert(request.responseText);
-            },
         })
-        console.log(items)
 
+        return items
+
+        
 
     })
 })
