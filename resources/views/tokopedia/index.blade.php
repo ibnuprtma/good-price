@@ -39,6 +39,7 @@
         
         <div class="mt-3">
           <input type="text" class="form-control m-input" id="search" placeholder="Search..."id="generalSearch">
+          <button class="btn btn-primary" id="btn-find">Cari</button>
         </div>
 
         <table class="table mt-5">

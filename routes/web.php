@@ -16,4 +16,4 @@ Route::get('/', function () {
 });
 
 
-Route::resource('tokopedia', 'TokopediaSourceController');
+Route::resource('tokopedia', 'TokopediaSourceController')->middleware('cors');
