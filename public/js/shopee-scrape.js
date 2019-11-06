@@ -33,21 +33,21 @@ $(document).ready(function () {
                     var originalURLDetail = 'https://shopee.co.id/api/v2/item/get?itemid='+ this['itemid'] +'&shopid=' + this['shopid']
                     var queryURLDetail = "https://cors-anywhere.herokuapp.com/" + originalURLDetail
                     
-                    // $.ajax({
-                    //     url: queryURLDetail,
-                    //     method: "GET",
-                    //     dataType: "json",
-                    //     // this headers section is necessary for CORS-anywhere
-                    //     headers: {
-                    //         "x-requested-with": "xhr"
-                    //     },
-                    //     success: function (res) {
-                    //         data['price'] = res['price']
-                    //         console.log(res)
-                    //     }
-                    // })
+                    $.ajax({
+                        url: queryURLDetail,
+                        method: "GET",
+                        dataType: "json",
+                        // this headers section is necessary for CORS-anywhere
+                        headers: {
+                            "x-requested-with": "xhr"
+                        },
+                        success: function (res) {
+                            data['price'] = res['price']
+                            console.log(res)
+                        }
+                    })
 
-                    items.push(data)
+                    // items.push(data)
                 })
             },
         })
