@@ -18,6 +18,10 @@ Route::get('/', function () {
 });
 
 
-Route::resource('tokopedia', 'TokopediaSourceController')->middleware('cors');
+Route::resource('tokopedia', 'TokopediaSourceController');
+Route::resource('shopee', 'ShopeeSourceController');
 
-Route::get('/shopee/{text}', 'ShopeeController@search')->name('shopee.search');
+Route::get('/shopee/stemming/data','ShopeeSourceController@stemming')->name('shopee.stemming');
+Route::get('/shopee/token/data','ShopeeSourceController@token')->name('shopee.token');
+Route::get('/shopee/case/data','ShopeeSourceController@case')->name('shopee.case');
+Route::get('/shopee/search/{id}','ShopeeSourceController@search')->name('shopee.search');
