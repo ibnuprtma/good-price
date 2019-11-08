@@ -11,9 +11,13 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('welcome');
 });
 
 
 Route::resource('tokopedia', 'TokopediaSourceController')->middleware('cors');
+
+Route::get('/shopee/{text}', 'ShopeeController@search')->name('shopee.search');
