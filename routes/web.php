@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -23,3 +25,4 @@ Route::get('/shopee/stemming/data','ShopeeSourceController@stemming')->name('sho
 Route::get('/shopee/token/data','ShopeeSourceController@token')->name('shopee.token');
 Route::get('/shopee/case/data','ShopeeSourceController@case')->name('shopee.case');
 Route::get('/shopee/stop/data','ShopeeSourceController@stop')->name('shopee.stop');
+Route::get('/shopee/search/{id}','ShopeeSourceController@search')->name('shopee.search');

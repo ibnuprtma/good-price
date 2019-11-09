@@ -24,7 +24,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-    <script src="{{ asset('js/shopee-scrape.js') }}"></script>
+    <script src="{{ asset('js/shopee.js') }}"></script>
 
      @stack('footer-scripts')
   </body>

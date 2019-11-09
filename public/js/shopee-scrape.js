@@ -43,18 +43,15 @@ $(document).ready(function () {
                         },
                         success: function (res) {
                             data['price'] = res['price']
-                            console.log(res)
                         }
                     })
 
-                    // items.push(data)
+                    items.push(data)
+                    console.log(items)
                 })
             },
         })
-
-        return items
-
-        
+        console.log(items)
 
     })
 })
