@@ -13,25 +13,25 @@
   <div class="row mt-5">
     <div class="col-2">
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="namecb">
         <label class="form-check-label" for="inlineCheckbox1">Nama</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option2">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="pricecb">
         <label class="form-check-label" for="inlineCheckbox1">Harga</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option3">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="desccb">
         <label class="form-check-label" for="inlineCheckbox1">Deskripsi</label>
       </div>
     </div>
     <div class="col-10">
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option4">
-        <label class="form-check-label" for="inlineCheckbox1">Review</label>
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="ratecb">
+        <label class="form-check-label" for="inlineCheckbox1">Rating</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option5">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="soldcb">
         <label class="form-check-label" for="inlineCheckbox1">Produk Terkirim</label>
       </div>
     </div>
@@ -53,7 +53,9 @@
           <th width="30%">Gambar</th>
           <th width="10%">Nama Barang</th>
           <th width="10%">Harga Barang</th>
-          <th width="50%">Deskripsi</th>
+          <th width="5%">Terjual</th>
+          <th width="5%">Rating</th>
+          <th width="40%">Deskripsi</th>
         </tr>
       </thead>
     </table>

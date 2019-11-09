@@ -167,27 +167,27 @@ class ShopeeSourceController extends Controller
         $data = array();
 
         foreach ($items as $key) {
-
-            $curl2 = curl_init();
-            curl_setopt_array($curl2, array(
-                CURLOPT_RETURNTRANSFER => 1,
-                CURLOPT_URL => 'https://shopee.co.id/api/v2/item/get?itemid=' . $key['itemid'] . '&shopid=' . $key['shopid'],
-                CURLOPT_USERAGENT => 'Codular Sample cURL Request'
-            ));
-
-            $response2 = curl_exec($curl2);
-            $response2 = json_decode($response2, TRUE);
-            $item = $response2['item'];
-            $x['image'] = $item['image'];
-            $x['name'] = $item['name'];
-            $x['price'] = $item['price'];
-            $x['description'] = $item['description'];
-            array_push($data, $x);
+            if ($key['ads_keyword'] == null) {
+                $curl2 = curl_init();
+                curl_setopt_array($curl2, array(
+                    CURLOPT_RETURNTRANSFER => 1,
+                    CURLOPT_URL => 'https://shopee.co.id/api/v2/item/get?itemid=' . $key['itemid'] . '&shopid=' . $key['shopid'],
+                    CURLOPT_USERAGENT => 'Codular Sample cURL Request'
+                ));
+                $response2 = curl_exec($curl2);
+                $response2 = json_decode($response2, TRUE);
+                $item = $response2['item'];
+                $x['image'] = $item['image'];
+                $x['name'] = $item['name'];
+                $x['price'] = $item['price'];
+                $x['historical_sold'] = $item['historical_sold'];
+                $x['rating'] = $item['item_rating']['rating_star'];
+                $x['description'] = $item['description'];
+                array_push($data, $x);
+            }
         }
 
         return DataTables::of($data)
             ->make(true);;
-
-        // return response()->json($response);
     }
 }

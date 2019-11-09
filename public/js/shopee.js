@@ -30,6 +30,14 @@ $(document).ready(function () {
                     name: 'price'
                 },
                 {
+                    data: 'historical_sold',
+                    name: 'historical_sold'
+                },
+                {
+                    data: 'rating',
+                    name: 'rating'
+                },
+                {
                     data: 'description',
                     name: 'description'
                 }
