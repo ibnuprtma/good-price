@@ -13,26 +13,30 @@
   <div class="row mt-5">
     <div class="col-2">
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="namecb">
+        <input class="form-check-input" name="atribute" type="checkbox" id="name" value="namecb">
         <label class="form-check-label" for="inlineCheckbox1">Nama</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="pricecb">
+        <input class="form-check-input" name="atribute" type="checkbox" id="price" value="pricecb">
         <label class="form-check-label" for="inlineCheckbox1">Harga</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="desccb">
+        <input class="form-check-input" name="atribute" type="checkbox" id="description" value="desccb">
         <label class="form-check-label" for="inlineCheckbox1">Deskripsi</label>
       </div>
     </div>
     <div class="col-10">
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="ratecb">
+        <input class="form-check-input" name="atribute" type="checkbox" id="rate" value="ratecb">
         <label class="form-check-label" for="inlineCheckbox1">Rating</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="soldcb">
+        <input class="form-check-input" name="atribute" type="checkbox" id="sold" value="soldcb">
         <label class="form-check-label" for="inlineCheckbox1">Produk Terkirim</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" name="atribute" type="checkbox" id="image" value="imagecb">
+        <label class="form-check-label" for="inlineCheckbox1">image</label>
       </div>
     </div>
   </div>
@@ -50,12 +54,12 @@
     <table class="table" id="table-shopee">
       <thead>
         <tr>
-          <th width="30%">Gambar</th>
-          <th width="10%">Nama Barang</th>
-          <th width="10%">Harga Barang</th>
-          <th width="5%">Terjual</th>
-          <th width="5%">Rating</th>
-          <th width="40%">Deskripsi</th>
+          <th id="image_item">Gambar</th>
+          <th id="name_item">Nama Barang</th>
+          <th id="price_item">Harga Barang</th>
+          <th id="sold_item">Terjual</th>
+          <th id="rate_item">Rating</th>
+          <th id="description_item">Deskripsi</th>
         </tr>
       </thead>
     </table>
