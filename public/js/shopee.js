@@ -8,6 +8,8 @@ $(document).ready(function () {
         $('#table-shopee').DataTable({
             processing: true,
             serverSide: true,
+            destroy: true,
+            searching: false,
             ajax: {
                 type: "GET",
                 url: '/shopee/search/' + search,
