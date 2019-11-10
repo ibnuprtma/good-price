@@ -125,6 +125,6 @@ class ShopeeSourceController extends Controller
         }
 
         return DataTables::of($data)
-            ->make(true);;
+            ->make(true);
     }
 }

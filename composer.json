@@ -10,11 +10,13 @@
     "require": {
         "php": "^7.1.3",
         "barryvdh/laravel-cors": "^0.11.4",
+        "fabpot/goutte": "^3.2",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "sastrawi/sastrawi": "^1",
         "sastrawi/tokenizer": "0.*",
+        "weidner/goutte": "^1.3",
         "yajra/laravel-datatables-oracle": "^9.7"
     },
     "require-dev": {

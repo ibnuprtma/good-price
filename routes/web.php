@@ -19,3 +19,6 @@ Route::get('/', function () {
 
 Route::get('/shopee', 'ShopeeSourceController@index')->name('shopee.index');
 Route::get('/shopee/search/{id}/{method}','ShopeeSourceController@search')->name('shopee.search');
+
+Route::get('/tokopedia', 'TokopediaSourceController@index')->name('tokopedia.index');
+Route::get('/tokopedia/search/{id}/{method}','TokopediaSourceController@search')->name('tokopedia.search');

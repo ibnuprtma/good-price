@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
+use Sastrawi\Tokenizer\TokenizerFactory;
+use Sastrawi\StopWordRemover\StopWordRemoverFactory;
 use Sastrawi\Stemmer\StemmerFactory;
+use Yajra\DataTables\Facades\DataTables;
 
 class TokopediaSourceController extends Controller
 {
@@ -14,87 +17,86 @@ class TokopediaSourceController extends Controller
      */
     public function index()
     {
-
-        // // create stemmer
-        // // cukup dijalankan sekali saja, biasanya didaftarkan di service container
-        // $stemmerFactory = new StemmerFactory();
-        // $stemmer  = $stemmerFactory->createStemmer();
-
-        // // stem
-        // $sentence = 'Perekonomian Indonesia sedang dalam pertumbuhan yang membanggakan';
-        // $output   = $stemmer->stem($sentence);
-        
-        // dd($output);
-        // echo $output . "\n";
-        // // ekonomi indonesia sedang dalam tumbuh yang bangga
-
-
         return view('tokopedia.index');
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function stemming($str)
     {
-        //
+        // STEMMING
+
+        $stemmerFactory = new StemmerFactory();
+        $stemmer  = $stemmerFactory->createStemmer();
+        $output   = $stemmer->stem($str);
+
+        return $output;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function tokenizing($str)
     {
-        //
+        // TOKEN
+        $tokenizerFactory  = new TokenizerFactory();
+        $tokenizer = $tokenizerFactory->createDefaultTokenizer();
+        $tokens = $tokenizer->tokenize($str);
+        $output = implode(" | ", $tokens);
+
+        return $output;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function caseFolding($str)
     {
-        //
+        // CASE FOLDING
+        $output   = strtolower($str);
+
+        return $output;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function stopWord($str)
     {
-        //
+        // STOP WORD
+        $stopWordRemoverFactory = new StopWordRemoverFactory();
+        $stopword = $stopWordRemoverFactory->createStopWordRemover();
+        $output   = $stopword->remove($str);
+
+        return $output;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function search($text, $method)
     {
-        //
-    }
+        $keyword = str_replace(" ", "%20", $text);
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_URL => 'https://ace.tokopedia.com/search/product/v3?scheme=https&device=desktop&related=true&source=universe&st=product&rows=50&q=' . $keyword,
+            CURLOPT_USERAGENT => 'Codular Sample cURL Request'
+        ));
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $response = curl_exec($curl);
+        $response = json_decode($response, TRUE);
+
+        $products = $response['data']['products'];
+
+        $data = array();
+
+        foreach ($products as $key) {
+            $x['image'] = $key['image_url_700'];
+            $x['price'] = $key['price_int'];
+            $x['rating'] = $key['rating'];
+
+            if ($method == 'tokenizing') {
+                $x['name'] = $this->tokenizing($key['name']);
+            } elseif ($method == 'stemming') {
+                $x['name'] = $this->stemming($key['name']);
+            } elseif ($method == 'case_folding') {
+                $x['name'] = $this->caseFolding($key['name']);
+            } elseif ($method == 'stopword') {
+                $x['name'] = $this->stopWord($key['name']);
+            } else {
+                $x['name'] = $key['name'];
+            }
+
+            array_push($data, $x);
+        }
+
+        return DataTables::of($data)
+            ->make(true);
     }
 }
