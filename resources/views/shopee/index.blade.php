@@ -15,10 +15,10 @@
   </div>
 
 
-  <button type="button" class="btn btn-primary">Tokenizing</button>
-  <button type="button" class="btn btn-secondary">Case Folding</button>
-  <button type="button" class="btn btn-success">Stemming</button>
-  <button type="button" class="btn btn-success">Stopword</button>
+  <button type="button" id="tokenizing" class="btn btn-primary">Tokenizing</button>
+  <button type="button" id="case_folding" class="btn btn-secondary">Case Folding</button>
+  <button type="button" id="stemming" class="btn btn-success">Stemming</button>
+  <button type="button" id="stopword" class="btn btn-success">Stopword</button>
 
   <div class="row mt-3">
     <div class="col-1">

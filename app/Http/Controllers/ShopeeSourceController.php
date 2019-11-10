@@ -87,33 +87,26 @@ class ShopeeSourceController extends Controller
     }
 
 
-    public function stemming()
+    public function stemming($sentence)
     {
         // STEMMING
 
         $stemmerFactory = new StemmerFactory();
         $stemmer  = $stemmerFactory->createStemmer();
-
-        $sentence = 'Perekonomian Indonesia sedang dalam pertumbuhan yang membanggakan';
         $output   = $stemmer->stem($sentence);
 
-        dd($output);
+        return $output;
     }
 
-    public function token()
+    public function tokenizing($str)
     {
-
         // TOKEN
-
         $tokenizerFactory  = new TokenizerFactory();
         $tokenizer = $tokenizerFactory->createDefaultTokenizer();
-
-        $strArray = 'Saya sedang belajar NLP Bahasa Indonesia.';
-
-        $tokens = $tokenizer->tokenize($strArray);
+        $tokens = $tokenizer->tokenize($str);
         $output = implode(" | ", $tokens);
 
-        dd($output);
+        return $output;
     }
 
     public function
@@ -150,7 +143,7 @@ class ShopeeSourceController extends Controller
 
     // }
 
-    public function search($text)
+    public function search($text, $method)
     {
         $keyword = str_replace(" ", "%20", $text);
         $curl = curl_init();
@@ -182,7 +175,14 @@ class ShopeeSourceController extends Controller
                 $x['price'] = $item['price'];
                 $x['historical_sold'] = $item['historical_sold'];
                 $x['rating'] = $item['item_rating']['rating_star'];
-                $x['description'] = $item['description'];
+
+                if ($method == 'tokenizing') {
+                    $x['description'] = $this->tokenizing($item['description']);
+                } elseif ($method == 'stemming') {
+                    $x['description'] = $this->stemming($item['description']);
+                } else {
+                    $x['description'] = $item['description'];
+                }
                 array_push($data, $x);
             }
         }

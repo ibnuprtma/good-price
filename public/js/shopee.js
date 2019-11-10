@@ -1,9 +1,23 @@
 $(document).ready(function () {
+
     $('#search-shopee').submit(function (event) {
+
+        var url
 
         event.preventDefault();
 
         var search = $('#search').val()
+        url = '/shopee/search/' + search + '/' + 'none'
+
+        $('#tokenizing').click(function () {
+            url = '/shopee/search/' + search + '/' + 'tokenizing'
+            $('#table-shopee').DataTable().ajax.url(url).load()
+        })
+
+        $('#stemming').click(function () {
+            url = '/shopee/search/' + search + '/' + 'stemming'
+            $('#table-shopee').DataTable().ajax.url(url).load()
+        })
 
         var table = $('#table-shopee').DataTable({
             processing: true,
@@ -12,7 +26,7 @@ $(document).ready(function () {
             searching: false,
             ajax: {
                 type: "GET",
-                url: '/shopee/search/' + search,
+                url: url,
             },
             columns: [
                 {
@@ -78,6 +92,7 @@ $(document).ready(function () {
         })
 
     })
+
 })
 
 
