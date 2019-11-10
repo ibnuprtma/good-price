@@ -5,95 +5,24 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Sastrawi\Stemmer\StemmerFactory;
 use Sastrawi\Tokenizer\TokenizerFactory;
-use Sastrawi\Stemmer\StopWordRemoverFactory;
+use Sastrawi\StopWordRemover\StopWordRemoverFactory;
 use Yajra\DataTables\Facades\DataTables;
 
 class ShopeeSourceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         return view('shopee.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-
-    public function stemming($sentence)
+    public function stemming($str)
     {
         // STEMMING
 
         $stemmerFactory = new StemmerFactory();
         $stemmer  = $stemmerFactory->createStemmer();
-        $output   = $stemmer->stem($sentence);
+        $output   = $stemmer->stem($str);
 
         return $output;
     }
@@ -109,19 +38,23 @@ class ShopeeSourceController extends Controller
         return $output;
     }
 
-    public function
-    case()
+    public function caseFolding($str)
     {
-
         // CASE FOLDING
+        $output   = strtolower($str);
 
-        $strArray = 'Saya Syuka KamaamuS';
-
-        $output   = strtolower($strArray);
-
-        dd($output);
+        return $output;
     }
 
+    public function stopWord($str)
+    {
+        // STOP WORD
+        $stopWordRemoverFactory = new StopWordRemoverFactory();
+        $stopword = $stopWordRemoverFactory->createStopWordRemover();
+        $output   = $stopword->remove($str);
+
+        return $output;
+    }
 
     // public function stop()
     // {
@@ -180,6 +113,10 @@ class ShopeeSourceController extends Controller
                     $x['description'] = $this->tokenizing($item['description']);
                 } elseif ($method == 'stemming') {
                     $x['description'] = $this->stemming($item['description']);
+                } elseif ($method == 'case_folding') {
+                    $x['description'] = $this->caseFolding($item['description']);
+                } elseif ($method == 'stopword') {
+                    $x['description'] = $this->stopWord($item['description']);
                 } else {
                     $x['description'] = $item['description'];
                 }

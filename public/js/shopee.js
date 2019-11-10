@@ -19,6 +19,16 @@ $(document).ready(function () {
             $('#table-shopee').DataTable().ajax.url(url).load()
         })
 
+        $('#case_folding').click(function () {
+            url = '/shopee/search/' + search + '/' + 'case_folding'
+            $('#table-shopee').DataTable().ajax.url(url).load()
+        })
+
+        $('#stopword').click(function () {
+            url = '/shopee/search/' + search + '/' + 'stopword'
+            $('#table-shopee').DataTable().ajax.url(url).load()
+        })
+
         var table = $('#table-shopee').DataTable({
             processing: true,
             serverSide: true,
